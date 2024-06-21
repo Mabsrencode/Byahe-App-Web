@@ -6,6 +6,7 @@ import Contact from "./pages/Contact"
 import NoPage from "./pages/NoPage"
 import Admin from "./pages/Admin"
 import { UserProvider } from "./context/useContext"
+import SignIn from "./pages/SignIn"
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
             </Route>
             <Route path="*" element={<NoPage />} />
+            <Route path="sign-in-as-admin" element={<SignIn />} />
           </Route>
         </Routes>
       </BrowserRouter>
