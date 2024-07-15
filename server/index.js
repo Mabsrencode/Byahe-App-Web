@@ -33,17 +33,24 @@ client
   .setKey(process.env.APPWRITE_API_KEY);
 
 const databases = new Databases(client);
-
+const driverLocations = [];
 io.on("connection", (socket) => {
   console.log("Client connected");
 
   socket.on("location", (coords) => {
-    console.log(`Received location: ${JSON.stringify(coords)}`);
-    // Broadcast the received location to all clients
-    socket.broadcast.emit("location", coords);
+    // console.log(`Received location: ${JSON.stringify(coords)}`);
+    // // Broadcast the received location to all clients
+    driverLocations[socket.id] = coords;
+    io.emit("locationUpdate", Object.values(driverLocations));
+    socket.broadcast.emit("location", Object.values(driverLocations));
+    console.log("driver location: ", driverLocations);
   });
 
   socket.on("disconnect", () => {
+    // console.log("Client disconnected");
+    delete driverLocations[socket.id];
+    io.emit("locationUpdate", Object.values(driverLocations));
+    socket.broadcast.emit("location", Object.values(driverLocations));
     console.log("Client disconnected");
   });
 });
