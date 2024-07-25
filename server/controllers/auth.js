@@ -16,7 +16,7 @@ const register = async (req, res, next) => {
       password,
     });
     const token = createSecretToken(user._id.toString());
-    res.cookie("byahe-user-tk", token, {
+    res.cookie("biyahe-user-tk", token, {
       withCredentials: true,
       httpOnly: false,
       secure: true,
@@ -51,7 +51,7 @@ const login = async (req, res, next) => {
       _id: user._id,
     };
     const token = createSecretToken(user._id);
-    res.cookie("byahe-user-tk", token, {
+    res.cookie("biyahe-user-tk", token, {
       withCredentials: true,
       httpOnly: false,
       secure: true,

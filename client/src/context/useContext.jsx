@@ -28,7 +28,7 @@ export const UserProvider = () => {
         setLoading(false);
       }, 2000);
 
-      return !data.status && removeCookie("byahe-user-tk");
+      return !data.status && removeCookie("biyahe-user-tk");
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);

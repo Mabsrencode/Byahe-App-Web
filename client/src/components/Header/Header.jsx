@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 // import LogoutButton from '../LogoutButton/LogoutButton';
 const Header = () => {
     const [data, setData] = useState()
-    const user = localStorage.getItem('fg-username')
     const status = data?.status
     const [navClick, setNavClick] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -26,16 +25,16 @@ const Header = () => {
 
 
 
-    // const validate = async () => {
-    //     const { data } = await axios.post(
-    //         "/auth",
-    //         {},
-    //         { withCredentials: true }
-    //     );
-    //     setData(data)
-    // }
+    const validate = async () => {
+        const { data } = await axios.post(
+            "/auth",
+            {},
+            { withCredentials: true }
+        );
+        setData(data)
+    }
     useEffect(() => {
-        // validate()
+        validate()
         const handleScroll = () => {
             if (window.scrollY > 100) {
                 setIsScrolled(true);
@@ -57,7 +56,7 @@ const Header = () => {
                     <div className={`flex flex-wrap justify-between items-center py-3 ${navClick && "gap-6"} lg:gap-6 md:py-4 md:gap-0`}>
                         <div className="w-full px-6 flex justify-between items-center lg:w-max md:px-0">
                             <Link to={"/"} aria-label="logo" className="flex space-x-2 items-center">
-                                <h1 className="text-4xl font-bold text-primary">Byahe</h1>
+                                <h1 className="text-4xl font-bold text-primary">Biyahe</h1>
                             </Link>
 
                             <button onClick={handleClick} aria-label="humburger" id="hamburger" className="relative w-10 h-10 -mr-2 lg:hidden">
