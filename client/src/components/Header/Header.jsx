@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // import Logo from "../../Assets/logo/logo.svg";
 // import SignInForm from '../Forms/SignInForm';
 // import SignUpForm from '../Forms/SignUpForm';
 // import LogoutButton from '../LogoutButton/LogoutButton';
 const Header = () => {
+    const location = useLocation();
     const [data, setData] = useState()
     const status = data?.status
     const [navClick, setNavClick] = useState(false);
@@ -34,7 +35,10 @@ const Header = () => {
         setData(data)
     }
     useEffect(() => {
-        validate()
+        if (location.pathname === "/dashboard") {
+            validate();
+        }
+
         const handleScroll = () => {
             if (window.scrollY > 100) {
                 setIsScrolled(true);
@@ -47,7 +51,7 @@ const Header = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [status]);
+    }, [location.pathname, status]);
 
     return (
         <>
