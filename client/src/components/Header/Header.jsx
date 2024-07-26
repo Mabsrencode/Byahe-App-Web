@@ -65,7 +65,7 @@ const Header = () => {
                             </button>
                         </div>
 
-                        <div className={`${navClick ? "scale-100 h-full p-6 md:mt-12" : "scale-0"} lg:mt-0 origin-top transition-all w-full lg:scale-100  lg:flex flex-wrap justify-end items-center space-y-6  rounded-xl  bg-white-50 lg:space-y-0 lg:p-0 lg:flex-nowrap lg:bg-transparent lg:w-7/12`}>
+                        <div className={`${navClick ? "scale-100 h-full p-6 md:mt-12" : "scale-0 h-0"} lg:mt-0 origin-top transition-all w-full lg:scale-100  lg:flex flex-wrap justify-end items-center space-y-6  rounded-xl  bg-white-50 lg:space-y-0 lg:p-0 lg:flex-nowrap lg:bg-transparent lg:w-7/12`}>
                             <div className="text-black-100 lg:pr-4">
                                 <ul className="font-medium text-sm md:flex gap-2">
                                     <li className="before:content-[''] relative before:h-[2px] before:w-0 before:hover:w-full before:absolute before:bg-gray-500 before:bottom-0 before:left-0">
