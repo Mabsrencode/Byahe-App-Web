@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 // import LogoutButton from '../LogoutButton/LogoutButton';
 const Header = () => {
     const location = useLocation();
-    const [data, setData] = useState()
+    const [data, setData] = useState();
     const status = data?.status
     const [navClick, setNavClick] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +28,7 @@ const Header = () => {
 
     const validate = async () => {
         const { data } = await axios.post(
-            "/auth",
+            "http://localhost:4000/auth/",
             {},
             { withCredentials: true }
         );

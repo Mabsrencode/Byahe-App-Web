@@ -2,10 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import logo from "/logo.png";
 // User Context
 const UserContext = createContext();
 
-export const UserProvider = () => {
+export const AdminProvider = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [user, setUser] = useState();
@@ -15,7 +16,7 @@ export const UserProvider = () => {
       setLoading(true);
 
       const { data } = await axios.post(
-        "http://localhost:4000/auth",
+        "http://localhost:4000/auth/",
         {},
         { withCredentials: true }
       );
@@ -35,13 +36,13 @@ export const UserProvider = () => {
 
   return (
     <UserContext.Provider value={user}>
-      {/* {loading ? (
+      {loading ? (
         <div className="flex justify-center items-center h-[80vh] animate-pulse">
-          <img className="h-[150px] w-[150px]" src={logo} alt="" />
+          <img className="h-[150px] w-[150px]" src={logo} alt="logo" />
         </div>
-      ) : ( */}
-      <Outlet />
-      {/* // )} */}
+      ) : (
+        <Outlet />
+      )}
     </UserContext.Provider>
   );
 };

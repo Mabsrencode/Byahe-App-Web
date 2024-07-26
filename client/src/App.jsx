@@ -5,7 +5,7 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import NoPage from "./pages/NoPage"
 import Admin from "./pages/Admin"
-import { UserProvider } from "./context/useContext"
+import { AdminProvider } from "./context/useContext"
 import SignIn from "./pages/SignIn"
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route element={<UserProvider />}>
+            <Route element={<AdminProvider />}>
               <Route path="/admin" element={<Admin />} />
             </Route>
             <Route path="*" element={<NoPage />} />

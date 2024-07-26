@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 const SignIn = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({
+        username: '',
+        password: ''
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate(); // Correct usage of useNavigate
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
-    const location = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,18 +23,25 @@ const SignIn = () => {
 
         try {
             await axios.post('http://localhost:4000/auth/login', {
-                username,
-                password
+                username: form.username,
+                password: form.password
             }, { withCredentials: true });
-            location('/admin');
+            navigate('/admin');
             window.location.reload();
         } catch (error) {
             console.error('Login failed:', error);
-            setError(error.response.data.message || error.message);
+            setError(error.response?.data?.message || error.message);
         }
         setIsLoading(false);
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({
+            ...form,
+            [name]: value
+        });
+    };
 
     return (
         <>
@@ -40,17 +50,34 @@ const SignIn = () => {
                     <h1 className="text-center text-4xl font-bold">Admin Login</h1>
                     <div className="mt-4">
                         <label className="block mb-2 text-sm font-semibold">Username</label>
-                        <input required onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Username" className="block w-full px-5 py-2.5 mt-2 placeholder-gray-400 bg-white border-2 outline-none border-neutral-gray-light rounded-lg dark:placeholder-gray-600 " />
+                        <input
+                            required
+                            name="username"
+                            onChange={handleChange}
+                            type="text"
+                            placeholder="Username"
+                            className="block w-full px-5 py-2.5 mt-2 placeholder-gray-400 bg-white border-2 outline-none border-neutral-gray-light rounded-lg dark:placeholder-gray-600"
+                        />
                     </div>
                     <div className="mt-4 relative">
                         <label className="block mb-2 text-sm font-semibold">Password</label>
-                        <input required onChange={(e) => setPassword(e.target.value)} type={`${showPassword ? "text" : "password"}`} placeholder="Password" className="block w-full px-5 py-2.5 mt-2 placeholder-gray-400 bg-white border-2 outline-none border-neutral-gray-light rounded-lg dark:placeholder-gray-600 " />
+                        <input
+                            required
+                            name="password"
+                            onChange={handleChange}
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Password"
+                            className="block w-full px-5 py-2.5 mt-2 placeholder-gray-400 bg-white border-2 outline-none border-neutral-gray-light rounded-lg dark:placeholder-gray-600"
+                        />
                         <div className="absolute top-[44px] right-4 text-xl">
-                            {showPassword ? <FaEyeSlash onClick={toggleShowPassword} className={`cursor-pointer`} /> : <FaEye onClick={toggleShowPassword} className={`cursor-pointer`} />}
+                            {showPassword ? <FaEyeSlash onClick={toggleShowPassword} className="cursor-pointer" /> : <FaEye onClick={toggleShowPassword} className="cursor-pointer" />}
                         </div>
                     </div>
-
-                    <button disabled={isLoading} className={`${isLoading && 'opacity-50'} w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-full`} type="submit">
+                    <button
+                        disabled={isLoading}
+                        className={`${isLoading && 'opacity-50'} w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-full`}
+                        type="submit"
+                    >
                         {isLoading ? (
                             <>
                                 <svg aria-hidden="true" role="status" className="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
