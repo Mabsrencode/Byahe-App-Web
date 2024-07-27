@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import io from "socket.io-client";
-import { SOCKET_SERVER_PORT, GOOGLE_MAP_KEY } from "../lib/apiKeys";
+import { SOCKET_SERVER_PORT } from "../lib/apiKeys";
 import axios from "axios";
 import logo from "/logo.png";
 // User Context
