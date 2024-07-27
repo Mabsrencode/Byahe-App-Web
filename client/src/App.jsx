@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import RootLayout from "./layout/RootLayout"
+import AdminLayout from "./layout/AdminLayout"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
@@ -16,11 +17,13 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NoPage />} />
+            <Route path="sign-in-as-admin" element={<SignIn />} />
+          </Route>
+          <Route path="/" element={<AdminLayout />}>
             <Route element={<AdminProvider />}>
               <Route path="/admin" element={<Admin />} />
             </Route>
-            <Route path="*" element={<NoPage />} />
-            <Route path="sign-in-as-admin" element={<SignIn />} />
           </Route>
         </Routes>
       </BrowserRouter>

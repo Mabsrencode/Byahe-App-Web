@@ -4,7 +4,7 @@ const Admin = () => {
     const user = useUser();
 
     return (
-        <div>Admin</div>
+        <div className='w-full'>Admin</div>
     )
 }
 
