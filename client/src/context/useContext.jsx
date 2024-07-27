@@ -15,8 +15,11 @@ export const AdminProvider = () => {
   console.log(user)
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState([]);
-
+  const [driverLocation, setDriverLocation] = useState([]);
+  console.log(driverLocation)
+  console.log(SOCKET_SERVER_PORT)
   useEffect(() => {
+    //!IF NOT WORKING USE STRING INSTEAD OF VARIABLES OR ENV
     const socket = io(SOCKET_SERVER_PORT);
     setSocket(socket);
 
