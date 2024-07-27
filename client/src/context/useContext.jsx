@@ -10,27 +10,26 @@ export const AdminProvider = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [user, setUser] = useState();
+  console.log(user)
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const verifyCookie = async () => {
       setLoading(true);
-
-      const { data } = await axios.post(
-        "http://localhost:4000/auth/",
-        {},
-        { withCredentials: true }
-      );
-      if (!data.status) {
-        navigate("/sign-in-as-admin");
-      }
-      setUser(data);
-      localStorage.setItem("user", data.role);
-      setTimeout(() => {
+      try {
+        const { data } = await axios.post("http://localhost:4000/auth/", {}, { withCredentials: true });
+        if (!data.status) {
+          navigate("/sign-in-as-admin");
+        } else {
+          setUser(data.user);
+          localStorage.setItem("user", JSON.stringify(data.user));
+        }
+      } catch (error) {
+        console.error("Verification failed:", error);
+      } finally {
         setLoading(false);
-      }, 2000);
-
-      return !data.status && removeCookie("biyahe-user-tk");
+      }
     };
+
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 

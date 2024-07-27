@@ -20,20 +20,25 @@ const SignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-
         try {
-            await axios.post('http://localhost:4000/auth/login', {
+            const response = await axios.post('http://localhost:4000/auth/login', {
                 username: form.username,
-                password: form.password
+                password: form.password,
             }, { withCredentials: true });
-            navigate('/admin');
-            window.location.reload();
+
+            if (response.data.user) {
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                navigate('/admin');
+                window.location.reload();
+            }
         } catch (error) {
             console.error('Login failed:', error);
             setError(error.response?.data?.message || error.message);
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;

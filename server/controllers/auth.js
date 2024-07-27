@@ -33,9 +33,8 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log(req.body);
     if (!username || !password) {
-      return res.json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields are required" });
     }
     const user = await User.findOne({ username });
     if (!user) {
@@ -45,22 +44,17 @@ const login = async (req, res, next) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Incorrect password" });
     }
-    const userData = {
-      username: user.username,
-      email: user.email,
-      role: user.role,
-      _id: user._id,
-    };
     const token = createSecretToken(user._id);
     res.cookie("biyahe-user-tk", token, {
-      withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
       secure: true,
       sameSite: "strict",
       maxAge: 60 * 60 * 1000,
     });
-
-    res.status(201).json({ message: "Login successful", token, userData });
+    res.status(200).json({
+      message: "Login successful",
+      user: { username: user.username, role: user.role, email: user.email },
+    });
   } catch (error) {
     next(error);
   }

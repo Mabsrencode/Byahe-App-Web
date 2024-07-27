@@ -1,8 +1,8 @@
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 
-const userVerification = (req, res) => {
-  const token = req.cookies.token;
+const userVerification = async (req, res) => {
+  const token = req.cookies["biyahe-user-tk"];
   if (!token) {
     return res.json({ status: false });
   }
@@ -12,7 +12,10 @@ const userVerification = (req, res) => {
     } else {
       const user = await User.findById(data.id);
       if (user)
-        return res.json({ status: true, user: user.username, role: user.role });
+        return res.json({
+          status: true,
+          user: { username: user.username, role: user.role, email: user.email },
+        });
       else return res.json({ status: false });
     }
   });
