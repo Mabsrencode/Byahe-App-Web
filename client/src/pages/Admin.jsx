@@ -1,5 +1,6 @@
 import React from 'react'
 import { useUser } from '../context/useContext'
+
 const Admin = () => {
     const user = useUser();
 

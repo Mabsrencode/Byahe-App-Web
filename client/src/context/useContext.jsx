@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import io from "socket.io-client";
+import { SOCKET_SERVER_PORT, GOOGLE_MAP_KEY } from "../lib/apiKeys";
 import axios from "axios";
 import logo from "/logo.png";
 // User Context
@@ -12,6 +14,32 @@ export const AdminProvider = () => {
   const [user, setUser] = useState();
   console.log(user)
   const [loading, setLoading] = useState(false);
+  const [socket, setSocket] = useState([]);
+
+  useEffect(() => {
+    const socket = io(SOCKET_SERVER_PORT);
+    setSocket(socket);
+
+    socket.on("connect", () => {
+      console.log("Socket.IO connected");
+    });
+
+    socket.on("location", (data) => {
+      setDriverLocation(data);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Socket.IO disconnected");
+      // socket.on("connect", () => {
+      //   console.log("Socket.IO reconnected");
+      // });
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   useEffect(() => {
     const verifyCookie = async () => {
       setLoading(true);
