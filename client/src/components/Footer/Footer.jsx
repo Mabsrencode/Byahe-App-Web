@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <Link to={"/"} className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
                         <img src={logo} className="h-8" alt="Biyahe Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-primary">Biyahe</span>
+                        <span className="self-center text-2xl font-bold whitespace-nowrap text-primary">Biyahe</span>
                     </Link>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 font-semibold">
                         <li>

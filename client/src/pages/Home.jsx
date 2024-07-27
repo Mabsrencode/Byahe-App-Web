@@ -49,32 +49,32 @@ const Home = () => {
                             <li className="bg-primary px-6 py-3 rounded-xl border border-gray shadow-xl">
                                 <div>
                                     <h2 className="font-bold"><i className="fa-solid mr-2 fa-location-dot"></i> Real-Time Tracking</h2>
-                                    <p className="font-semibold text-gray text-xs sm:text-sm">Follow your bus in real-time on an interactive map, ensuring you know exactly where it is and when it will arrive.
+                                    <p className="font-semibold mt-2 text-gray text-xs sm:text-sm">Follow your bus in real-time on an interactive map, ensuring you know exactly where it is and when it will arrive.
                                     </p>
                                 </div>
                             </li>
                             <li className="bg-primary px-6 py-3 rounded-xl border border-gray shadow-xl">
                                 <div>
                                     <h2 className="font-bold"><i className="fa-solid mr-2 fa-bell"></i>Proactive Notifications</h2>
-                                    <p className="font-semibold text-gray text-xs sm:text-sm">Get instant alerts when your bus is approaching, when the driver is needed, and when you&apos;re nearing your destination. Never miss your stop again!</p>
+                                    <p className="font-semibold mt-2 text-gray text-xs sm:text-sm">Get instant alerts when your bus is approaching, when the driver is needed, and when you&apos;re nearing your destination. Never miss your stop again!</p>
                                 </div>
                             </li>
                             <li className="bg-primary px-6 py-3 rounded-xl border border-gray shadow-xl">
                                 <div>
                                     <h2 className="font-bold"><i className="fa-solid mr-2 fa-globe"></i>Live Distance and Speed Metrics</h2>
-                                    <p className="font-semibold text-gray text-xs sm:text-sm">Monitor the distance and speed of your bus, providing you with detailed travel insights.</p>
+                                    <p className="font-semibold mt-2 text-gray text-xs sm:text-sm">Monitor the distance and speed of your bus, providing you with detailed travel insights.</p>
                                 </div>
                             </li>
                             <li className="bg-primary px-6 py-3 rounded-xl border border-gray shadow-xl">
                                 <div>
                                     <h2 className="font-bold"><i className="fa-regular mr-2 fa-clock"></i>Accurate Arrival Estimates</h2>
-                                    <p className="font-semibold text-gray text-xs sm:text-sm">Stay informed with precise arrival times, helping you manage your schedule better.</p>
+                                    <p className="font-semibold mt-2 text-gray text-xs sm:text-sm">Stay informed with precise arrival times, helping you manage your schedule better.</p>
                                 </div>
                             </li>
                             <li className="bg-primary px-6 py-3 rounded-xl border border-gray shadow-xl">
                                 <div>
                                     <h2 className="font-bold"><i className="fa-solid mr-2 fa-location-arrow"></i>Destination Directions</h2>
-                                    <p className="font-semibold text-gray text-xs sm:text-sm">Choose your destination and see the best route to get there, including the direction from your current location to your selected destination.</p>
+                                    <p className="font-semibold mt-2 text-gray text-xs sm:text-sm">Choose your destination and see the best route to get there, including the direction from your current location to your selected destination.</p>
                                 </div>
                             </li>
                         </ul>
