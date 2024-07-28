@@ -1,16 +1,13 @@
 import React from 'react';
 import GoogleMapBusTracking from '../components/GoogleMap/GoogleMapBusTracking';
-
+import { useUser } from '../context/useContext';
 const Admin = () => {
-    const markers = [
-        { lat: 40.712776, lng: -74.005974 }, // New York
-        { lat: 34.052235, lng: -118.243683 }, // Los Angeles
-        { lat: 41.878113, lng: -87.629799 }, // Chicago
-    ];
+    const { driverLocation } = useUser();
+    console.log(driverLocation)
 
     return (
         <div className="w-full">
-            <GoogleMapBusTracking markers={markers} />
+            <GoogleMapBusTracking markers={driverLocation} />
         </div>
     );
 };

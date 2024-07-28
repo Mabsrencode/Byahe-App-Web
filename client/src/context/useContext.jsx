@@ -12,7 +12,7 @@ export const AdminProvider = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [user, setUser] = useState();
-  console.log(user)
+  console.log("user: ", user)
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState([]);
   const [driverLocation, setDriverLocation] = useState([]);
@@ -20,7 +20,7 @@ export const AdminProvider = () => {
   console.log(SOCKET_SERVER_PORT)
   useEffect(() => {
     //!IF NOT WORKING USE STRING INSTEAD OF VARIABLES OR ENV
-    const socket = io(SOCKET_SERVER_PORT);
+    const socket = io("http://localhost:8080");
     setSocket(socket);
 
     socket.on("connect", () => {
@@ -65,7 +65,7 @@ export const AdminProvider = () => {
   }, [cookies, navigate, removeCookie]);
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{ user, driverLocation, setDriverLocation }}>
       {loading ? (
         <div className="flex justify-center items-center h-[80vh] animate-pulse">
           <img className="h-[150px] w-[150px]" src={logo} alt="logo" />

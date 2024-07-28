@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
@@ -7,12 +5,19 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db.js";
-import { Client, Databases } from "node-appwrite";
 import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  },
+});
+
 app.use(express.json());
 app.use(
   cors({
@@ -26,20 +31,11 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-const client = new Client();
-client
-  .setEndpoint(process.env.APPWRITE_ENDPOINT)
-  .setProject(process.env.APPWRITE_PROJECT_ID)
-  .setKey(process.env.APPWRITE_API_KEY);
-
-const databases = new Databases(client);
 const driverLocations = [];
 io.on("connection", (socket) => {
   console.log("Client connected");
 
   socket.on("location", (coords) => {
-    // console.log(`Received location: ${JSON.stringify(coords)}`);
-    // // Broadcast the received location to all clients
     driverLocations[socket.id] = coords;
     io.emit("locationUpdate", Object.values(driverLocations));
     socket.broadcast.emit("location", Object.values(driverLocations));
@@ -47,7 +43,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    // console.log("Client disconnected");
     delete driverLocations[socket.id];
     io.emit("locationUpdate", Object.values(driverLocations));
     socket.broadcast.emit("location", Object.values(driverLocations));
