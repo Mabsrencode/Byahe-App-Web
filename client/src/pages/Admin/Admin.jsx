@@ -1,6 +1,6 @@
 import React from 'react';
-import GoogleMapBusTracking from '../components/GoogleMap/GoogleMapBusTracking';
-import { useUser } from '../context/useContext';
+import GoogleMapBusTracking from '../../components/GoogleMap/GoogleMapBusTracking';
+import { useUser } from '../../context/useContext';
 const Admin = () => {
     const { driverLocation } = useUser();
     console.log(driverLocation)

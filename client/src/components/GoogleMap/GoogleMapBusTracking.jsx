@@ -11,7 +11,7 @@ const GoogleMapBusTracking = ({ markers }) => {
 
     const mapContainerStyle = {
         width: '100%',
-        height: '800px',
+        height: '100%',
     };
 
     const handleLoad = useCallback(() => {

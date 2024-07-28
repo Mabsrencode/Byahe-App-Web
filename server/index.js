@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     driverLocations[socket.id] = coords;
     io.emit("locationUpdate", Object.values(driverLocations));
     socket.broadcast.emit("location", Object.values(driverLocations));
-    console.log("driver location: ", driverLocations);
+    console.log("Driver location: ", driverLocations);
   });
 
   socket.on("disconnect", () => {
@@ -48,6 +48,10 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("location", Object.values(driverLocations));
     console.log("Client disconnected");
   });
+});
+
+io.on("error", (error) => {
+  console.error("Socket.IO Error:", error);
 });
 
 console.log("Socket.IO server started on port 8080");
@@ -63,4 +67,23 @@ connectDB()
   .catch((error) => {
     console.error("Error connecting to database:", error);
   });
-httpServer.listen(8080);
+
+httpServer.listen(8080, () => {
+  console.log("HTTP server listening on port 8080");
+});
+
+httpServer.on("error", (error) => {
+  if (error.code === "ECONNRESET") {
+    console.warn("Connection reset by peer.");
+  } else {
+    console.error("HTTP Server Error:", error);
+  }
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
