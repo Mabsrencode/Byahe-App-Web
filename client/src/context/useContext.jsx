@@ -49,6 +49,7 @@ export const AdminProvider = () => {
       try {
         const { data } = await axios.post("http://localhost:4000/auth/", {}, { withCredentials: true });
         if (!data.status) {
+          removeCookie("biyahe-user-tk")
           navigate("/sign-in-as-admin");
         } else {
           setUser(data.user);
@@ -57,7 +58,9 @@ export const AdminProvider = () => {
       } catch (error) {
         console.error("Verification failed:", error);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000)
       }
     };
 
@@ -67,8 +70,11 @@ export const AdminProvider = () => {
   return (
     <UserContext.Provider value={{ user, driverLocation, setDriverLocation }}>
       {loading ? (
-        <div className="flex justify-center items-center h-[80vh] animate-pulse">
-          <img className="h-[150px] w-[150px]" src={logo} alt="logo" />
+        <div className="flex justify-center items-center w-full h-cover animate-pulse">
+          <div className="h-[150px] w-[150px]">
+            <img src={logo} alt="logo" />
+            <h1 className="text-center text-4xl text-primary font-bold">BIYAHE</h1>
+          </div>
         </div>
       ) : (
         <Outlet />

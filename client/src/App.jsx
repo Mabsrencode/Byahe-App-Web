@@ -8,6 +8,10 @@ import NoPage from "./pages/NoPage"
 import Admin from "./pages/Admin/Admin"
 import { AdminProvider } from "./context/useContext"
 import SignIn from "./pages/SignIn"
+import VerifiedDrivers from "./pages/Admin/VerifiedDrivers"
+import DriversVerification from "./pages/Admin/DriversVerification"
+import Graph from "./pages/Admin/Graph"
+import Settings from "./pages/Admin/Settings"
 function App() {
   return (
     <>
@@ -23,6 +27,10 @@ function App() {
           <Route path="/" element={<AdminLayout />}>
             <Route element={<AdminProvider />}>
               <Route path="/admin" element={<Admin />} />
+              <Route path="/verified-drivers" element={<VerifiedDrivers />} />
+              <Route path="/drivers-verification" element={<DriversVerification />} />
+              <Route path="/graph" element={<Graph />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
           </Route>
         </Routes>

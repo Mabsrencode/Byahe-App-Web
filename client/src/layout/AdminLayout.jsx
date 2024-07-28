@@ -4,7 +4,7 @@ import SideBar from '../components/Sidebar/SideBar'
 const AdminLayout = () => {
     return (
         <>
-            <main className='bg-primary-50 min-h-screen flex'>
+            <main className='bg-primary-50 min-h-screen w-full flex'>
                 <SideBar />
                 <Outlet />
             </main>

@@ -60,4 +60,19 @@ const login = async (req, res, next) => {
   }
 };
 
-export { register, login };
+//logout
+const logout = (req, res) => {
+  try {
+    res.clearCookie("biyahe-user-tk", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err.message);
+    res.sendStatus(400);
+  }
+};
+
+export { register, login, logout };
