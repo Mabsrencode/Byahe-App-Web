@@ -11,7 +11,7 @@ const SignIn = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate(); // Correct usage of useNavigate
+    const navigate = useNavigate();
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -25,12 +25,7 @@ const SignIn = () => {
                 username: form.username,
                 password: form.password,
             }, { withCredentials: true });
-
-            if (response.data.user) {
-                localStorage.setItem('user', JSON.stringify(response.data.user));
-                navigate('/admin');
-                window.location.reload();
-            }
+            navigate('/admin');
         } catch (error) {
             console.error('Login failed:', error);
             setError(error.response?.data?.message || error.message);
