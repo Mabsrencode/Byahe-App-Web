@@ -56,7 +56,7 @@ const Header = () => {
     return (
         <>
             <nav className={`fixed z-20 w-full ${navClick && "bg-primary-50"} lg:bg-transparent ${isScrolled && "backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200 shadow-md"}`}>
-                <div className="container m-auto px-2 md:px-12 lg:px-16 lg:py-4">
+                <div className="container m-auto px-2 md:px-12 lg:px-16">
                     <div className={`flex flex-wrap justify-between items-center py-3 ${navClick && "gap-6"} lg:gap-6 md:py-4 md:gap-0`}>
                         <div className="w-full px-6 flex justify-between items-center lg:w-max md:px-0">
                             <Link to={"/"} aria-label="logo" className="flex space-x-2 items-center">
