@@ -64,8 +64,8 @@ const Header = () => {
                             </Link>
 
                             <button onClick={handleClick} aria-label="humburger" id="hamburger" className="relative w-10 h-10 -mr-2 lg:hidden">
-                                <div aria-hidden="true" id="line" className="inset-0 w-6 h-0.5 m-auto rounded bg-primary transtion duration-300"></div>
-                                <div aria-hidden="true" id="line2" className="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-primary transtion duration-300"></div>
+                                <div aria-hidden="true" id="line" className="inset-0 w-6 h-0.5 m-auto rounded bg-primary transition duration-300"></div>
+                                <div aria-hidden="true" id="line2" className="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-primary transition duration-300"></div>
                             </button>
                         </div>
 
