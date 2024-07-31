@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db.js";
 import authRoutes from "./routes/auth.routes.js";
+import driversRoutes from "./routes/drivers.routes.js";
 
 const app = express();
 const httpServer = createServer(app);
@@ -57,6 +58,7 @@ io.on("error", (error) => {
 console.log("Socket.IO server started on port 8080");
 
 app.use("/auth", authRoutes);
+app.use("/drivers", driversRoutes);
 const PORT = process.env.PORT || 4000;
 connectDB()
   .then(() => {
