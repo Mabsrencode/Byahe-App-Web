@@ -68,7 +68,7 @@ export const AdminProvider = () => {
   }, [cookies, navigate, removeCookie]);
 
   return (
-    <UserContext.Provider value={{ user, driverLocation, setDriverLocation }}>
+    <UserContext.Provider value={{ user, driverLocation, setDriverLocation, setLoading }}>
       {loading ? (
         <div className="flex justify-center items-center w-full h-cover animate-pulse">
           <div className="h-[150px] w-[150px]">

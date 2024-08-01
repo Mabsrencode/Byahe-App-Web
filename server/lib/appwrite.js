@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Client, Databases, Query } from "node-appwrite";
 
 const client = new Client();
@@ -22,6 +23,5 @@ export const getUnverifiedDrivers = async () => {
     config.userCollectionId,
     [Query.equal("verification", "unverified")]
   );
-  console.log(data);
   return data;
 };

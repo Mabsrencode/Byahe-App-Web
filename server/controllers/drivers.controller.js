@@ -4,7 +4,6 @@ const getDriversInformation = async (req, res) => {
   try {
     const data = await getUnverifiedDrivers();
     res.status(200).json(data);
-    console.log(data);
   } catch (error) {
     console.log(error);
     res
