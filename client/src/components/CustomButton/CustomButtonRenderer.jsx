@@ -18,7 +18,7 @@ const CustomButtonRenderer = (props) => {
 
     return (
         <button disabled={loading} className='px-6 rounded-xl bg-primary disabled:bg-primary-100' onClick={handleClick}>
-            Verify
+            {loading ? "Processing..." : "Verify"}
         </button>
     );
 };
