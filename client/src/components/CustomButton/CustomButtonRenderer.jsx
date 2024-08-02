@@ -12,11 +12,12 @@ const CustomButtonRenderer = (props) => {
             console.error('Error updating verification status:', error);
         } finally {
             setLoading(false);
+            window.location.reload();
         }
     };
 
     return (
-        <button className='px-6 rounded-xl bg-primary' onClick={handleClick}>
+        <button disabled={loading} className='px-6 rounded-xl bg-primary disabled:bg-primary-100' onClick={handleClick}>
             Verify
         </button>
     );
