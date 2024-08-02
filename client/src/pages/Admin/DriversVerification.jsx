@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import axios from 'axios';
 import moment from 'moment';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import CustomButtonRenderer from '../../components/CustomButton/CustomButtonRenderer';
 
 const DriversVerification = () => {

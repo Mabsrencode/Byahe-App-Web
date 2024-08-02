@@ -16,7 +16,7 @@ const getVerifiedDriversInformation = async (req, res) => {
   }
 };
 
-const getDriversInformation = async (req, res) => {
+const getUnverifiedDriversInformation = async (req, res) => {
   try {
     const data = await getUnverifiedDrivers();
     res.status(200).json(data);
@@ -41,4 +41,8 @@ const updateDriverVerification = async (req, res) => {
   }
 };
 
-export { getDriversInformation, updateDriverVerification };
+export {
+  getUnverifiedDriversInformation,
+  updateDriverVerification,
+  getVerifiedDriversInformation,
+};
