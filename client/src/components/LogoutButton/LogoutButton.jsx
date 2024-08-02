@@ -9,10 +9,11 @@ const LogoutButton = () => {
         try {
             const result = await axios.get('http://localhost:4000/auth/logout', { withCredentials: true });
             console.log(result);
-            removeCookie('biyahe-user-tk');
-            navigate('/');
+
         } catch (error) {
             console.error('Error logging out:', error);
+        } finally {
+            window.location.reload();
         }
     };
     return (

@@ -1,40 +1,68 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import axios from 'axios';
+import moment from 'moment';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
+
 const DriversVerification = () => {
     const [rowData, setRowData] = useState([]);
     const [colDefs, setColDefs] = useState([]);
-    console.log("col data: ", colDefs)
-    console.log("row data: ", rowData)
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = (await axios.get("http://localhost:4000/drivers/unverified"))?.data?.documents;
-                setRowData(data)
-                if (data.length > 0) {
-                    const keys = Object.keys(data[0]);
-                    const columns = keys.map(key => ({
-                        field: key
-                    }));
-                    setColDefs(columns);
-                }
+                setLoading(true);
+                const response = await axios.get("http://localhost:4000/drivers/unverified");
+                const data = response?.data?.documents || [];
+                console.log("fetch data: ", data);
+
+                const filteredData = data.map(item => ({
+                    username: item.username,
+                    email: item.email,
+                    verification: item.verification,
+                    feedback: item.feedback ? item.feedback : "No feedback available.",
+                    accountId: item.accountId,
+                    $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
+                    $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
+                }));
+
+                setRowData(filteredData);
+
+                setColDefs([
+                    { field: 'username', headerName: 'Username' },
+                    { field: 'email', headerName: 'Email' },
+                    { field: 'verification', headerName: 'Verification' },
+                    { field: 'feedback', headerName: 'Feedback' },
+                    { field: 'accountId', headerName: 'Account ID' },
+                    { field: '$createdAt', headerName: 'Created At' },
+                    { field: '$updatedAt', headerName: 'Updated At' }
+                ]);
             } catch (error) {
-                console.log(error)
+                console.error("Error fetching data:", error);
+            } finally {
+                setLoading(false);
             }
-        }
-        fetchData()
-    }, [])
+        };
+        fetchData();
+    }, []);
+
+    console.log("Column Definitions:", colDefs);
+    console.log("Row Data:", rowData);
+
     return (
         <section className='w-full h-full'>
-            <div className="ag-theme-quartz" style={{ height: 600, width: '100%' }}>
+            <div className="ag-theme-quartz h-screen w-full">
                 <AgGridReact
                     pagination
                     rowData={rowData}
                     columnDefs={colDefs}
+                    loading={loading}
                 />
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default DriversVerification
+export default DriversVerification;
