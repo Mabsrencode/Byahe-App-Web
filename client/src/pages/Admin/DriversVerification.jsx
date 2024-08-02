@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import CustomButtonRenderer from '../../components/CustomButton/CustomButtonRenderer';
 
 const DriversVerification = () => {
     const [rowData, setRowData] = useState([]);
@@ -24,8 +25,9 @@ const DriversVerification = () => {
                     verification: item.verification,
                     feedback: item.feedback ? item.feedback : "No feedback available.",
                     accountId: item.accountId,
-                    // $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
-                    // $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
+                    $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
+                    $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
+                    action: item.accountId
                 }));
 
                 setRowData(filteredData);
@@ -36,9 +38,9 @@ const DriversVerification = () => {
                     { field: 'verification', headerName: 'Verification' },
                     { field: 'feedback', headerName: 'Feedback' },
                     { field: 'accountId', headerName: 'Account ID' },
-                    // { field: '$createdAt', headerName: 'Created At' },
-                    // { field: '$updatedAt', headerName: 'Updated At' },
-                    { field: 'action', headerName: 'Action' },
+                    { field: '$createdAt', headerName: 'Created At' },
+                    { field: '$updatedAt', headerName: 'Updated At' },
+                    { field: 'action', headerName: 'Action', cellRenderer: CustomButtonRenderer },
                 ]);
             } catch (error) {
                 console.error("Error fetching data:", error);
