@@ -1,7 +1,20 @@
 import {
+  getVerifiedDrivers,
   getUnverifiedDrivers,
   updateUnverifiedDriver,
 } from "../lib/appwrite.js";
+
+const getVerifiedDriversInformation = async (req, res) => {
+  try {
+    const data = await getVerifiedDrivers();
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching verified drivers" });
+  }
+};
 
 const getDriversInformation = async (req, res) => {
   try {
