@@ -27,7 +27,8 @@ const DriversVerification = () => {
                     accountId: item.accountId,
                     $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
                     $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
-                    action: item.accountId
+                    action: item.$id,
+
                 }));
 
                 setRowData(filteredData);

@@ -15,8 +15,8 @@ client
   .setEndpoint(config.endpoint)
   .setProject(config.projectId)
   .setKey(config.apiKey);
-
-export const getUnverifiedDrivers = async () => {
+//get all unverified drivers
+const getUnverifiedDrivers = async () => {
   const databases = new Databases(client);
   let data = await databases.listDocuments(
     config.databaseId,
@@ -25,3 +25,15 @@ export const getUnverifiedDrivers = async () => {
   );
   return data;
 };
+// update unverified driver to verified
+const updateUnverifiedDriver = async (documentId) => {
+  const databases = new Databases(client);
+  await databases.updateDocument(
+    config.databaseId,
+    config.userCollectionId,
+    documentId.id,
+    { verification: "verified" }
+  );
+};
+
+export { getUnverifiedDrivers, updateUnverifiedDriver };

@@ -1,4 +1,7 @@
-import { getUnverifiedDrivers } from "../lib/appwrite.js";
+import {
+  getUnverifiedDrivers,
+  updateUnverifiedDriver,
+} from "../lib/appwrite.js";
 
 const getDriversInformation = async (req, res) => {
   try {
@@ -12,4 +15,17 @@ const getDriversInformation = async (req, res) => {
   }
 };
 
-export { getDriversInformation };
+const updateDriverVerification = async (req, res) => {
+  const accountId = req.params;
+  try {
+    const data = await updateUnverifiedDriver(accountId);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating unverified drivers" });
+  }
+};
+
+export { getDriversInformation, updateDriverVerification };
