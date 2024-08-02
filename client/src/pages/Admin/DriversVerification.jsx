@@ -24,8 +24,8 @@ const DriversVerification = () => {
                     verification: item.verification,
                     feedback: item.feedback ? item.feedback : "No feedback available.",
                     accountId: item.accountId,
-                    $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
-                    $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
+                    // $createdAt: moment(item.$createdAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$createdAt).fromNow(),
+                    // $updatedAt: moment(item.$updatedAt).format('YYYY-MM-DD HH:mm:ss') + " - " + moment(item.$updatedAt).fromNow(),
                 }));
 
                 setRowData(filteredData);
@@ -36,8 +36,9 @@ const DriversVerification = () => {
                     { field: 'verification', headerName: 'Verification' },
                     { field: 'feedback', headerName: 'Feedback' },
                     { field: 'accountId', headerName: 'Account ID' },
-                    { field: '$createdAt', headerName: 'Created At' },
-                    { field: '$updatedAt', headerName: 'Updated At' }
+                    // { field: '$createdAt', headerName: 'Created At' },
+                    // { field: '$updatedAt', headerName: 'Updated At' },
+                    { field: 'action', headerName: 'Action' },
                 ]);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -56,8 +57,17 @@ const DriversVerification = () => {
             <div className="ag-theme-quartz h-screen w-full">
                 <AgGridReact
                     pagination
+                    rowStyle={{
+                        font: '12px sans-serif',
+                        fontWeight: 600,
+                        color: "gray"
+                    }}
                     rowData={rowData}
                     columnDefs={colDefs}
+                    columnTypes={{
+                        font: '16px sans-serif',
+                        fontWeight: 700,
+                    }}
                     loading={loading}
                 />
             </div>
