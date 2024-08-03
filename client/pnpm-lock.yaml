@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@canvasjs/react-charts':
+        specifier: ^1.0.2
+        version: 1.0.2(@canvasjs/charts@3.10.1)(react@18.3.1)
       '@react-google-maps/api':
         specifier: ^2.19.3
         version: 2.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -81,6 +84,15 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@canvasjs/charts@3.10.1':
+    resolution: {integrity: sha512-WDuciyEDx/Ac8YMrkFAAnY+U7dba0MieE6B5JvISQjXpxClSojaWzt7LN6f/Il0URztFY2OmuuRQzCcwoL8yxA==}
+
+  '@canvasjs/react-charts@1.0.2':
+    resolution: {integrity: sha512-PZgJlDbGdMF4AN/KvrvGY9X50EByJMZ7MHfQB/U0aky9Onn9mt0CpsvwudBsBe+DofaV3SHR4SHn/Wfo/pubDw==}
+    peerDependencies:
+      '@canvasjs/charts': ^3.7.5
+      react: '>=16.0.0'
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -1731,6 +1743,13 @@ packages:
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
+
+  '@canvasjs/charts@3.10.1': {}
+
+  '@canvasjs/react-charts@1.0.2(@canvasjs/charts@3.10.1)(react@18.3.1)':
+    dependencies:
+      '@canvasjs/charts': 3.10.1
+      react: 18.3.1
 
   '@esbuild/aix-ppc64@0.20.2':
     optional: true
